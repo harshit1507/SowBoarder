@@ -13,6 +13,7 @@ public class FinishLine : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log(other.name + " Finished!");
+            GetComponent<AudioSource>().Play();
             finishEffect.Play();
             StartCoroutine(ReloadScene());
         }
