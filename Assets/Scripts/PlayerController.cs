@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -10,6 +11,7 @@ public class PlayerController : MonoBehaviour
     
     private Rigidbody2D rb;
     private SurfaceEffector2D surfaceEffector2D;
+    private bool isDead = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isDead)
+        {
+            surfaceEffector2D.speed *= 0.9f;
+            return;
+        }
+
         RotatePlayer();
         RespondToBoost();
     }
@@ -48,5 +56,15 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddTorque(-torqueAmount);
         }
+    }
+
+    public void SetIsDead(bool value)
+    {
+        this.isDead = value;
+    }
+
+    public bool IsDead()
+    {
+        return isDead;
     }
 }
